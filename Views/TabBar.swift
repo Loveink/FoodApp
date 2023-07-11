@@ -29,16 +29,15 @@ class TabBarController: UITabBarController {
 
     func profileControler() -> UINavigationController {
         let navigationVC = UINavigationController(rootViewController: UserProfileViewController())
-        navigationVC.tabBarItem = UITabBarItem(title: "Аккаунт", image: UIImage(named: "person"), tag: 3)
+        navigationVC.tabBarItem = UITabBarItem(title: "Аккаунт", image: UIImage(named: "profile-circle"), tag: 3)
         return navigationVC
     }
 
 
     func createTabBar() -> UITabBarController {
         let tabBar = UITabBarController()
-        tabBar.viewControllers = [homeController(), categoriesControler(), bookmarmController(), profileControler()]
-        tabBar.tabBar.layer.cornerRadius = 12
-        tabBar.tabBar.layer.borderWidth = 0.5
+        tabBar.viewControllers = [homeController(), searchControler(), bagController(), profileControler()]
+        tabBar.tabBar.layer.borderWidth = 0.2
         tabBar.tabBar.layer.masksToBounds = true
         return tabBar
     }
