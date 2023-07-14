@@ -12,7 +12,14 @@ struct DishModel: Codable {
     let name: String
     let price: Int
     let weight: Int
-    let description: String
-    let imageURL: String
-    let tegs: [String]
+    let dishDescription: String
+    let imageURL: String?
+    let tags: [String]
+
+    enum CodingKeys: String, CodingKey {
+        case id, name, price, weight
+        case dishDescription = "description"
+        case imageURL = "image_url"
+        case tags = "tegs"
+    }
 }

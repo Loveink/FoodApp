@@ -10,7 +10,7 @@ import UIKit
 class CategoryCollectionView: UIView {
 
     var collectionView: UICollectionView!
-
+    weak var navigationController: UINavigationController?
     var categories: [CategoryModel] = [] {
         didSet {
             DispatchQueue.main.async {
@@ -32,13 +32,12 @@ class CategoryCollectionView: UIView {
 
     private func configureCollection() {
         let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .vertical
         collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
-        collectionView.showsHorizontalScrollIndicator = false
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.register(CategoryCell.self, forCellWithReuseIdentifier: CategoryCell.identifier)
         collectionView.delegate = self
         collectionView.dataSource = self
+        collectionView.isScrollEnabled = false
     }
 
     private func setupConstraints() {
@@ -65,7 +64,7 @@ extension CategoryCollectionView: UICollectionViewDelegate, UICollectionViewData
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCell.identifier, for: indexPath) as? CategoryCell else {
             return UICollectionViewCell()
         }
-        let selectedNews = categories[indexPath.row]
+        let selectedCategory = categories[indexPath.row]
 
         cell.configureCell(categories[indexPath.row])
         return cell
@@ -74,7 +73,19 @@ extension CategoryCollectionView: UICollectionViewDelegate, UICollectionViewData
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let collectionViewWidth = collectionView.bounds.width
         let cellWidth = collectionViewWidth
-      let cellHeight = collectionView.bounds.height / 4.2
+        let cellHeight = collectionView.bounds.height / 4.2
         return CGSize(width: cellWidth, height: cellHeight)
     }
+
+  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+      guard let navigationController = navigationController else {
+          return
+      }
+
+      let selectedCategory = self.categories[indexPath.row]
+      let vc = DishesViewController()
+      vc.currentCategory = selectedCategory
+      navigationController.pushViewController(vc, animated: true)
+  }
+
 }

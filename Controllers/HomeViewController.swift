@@ -20,7 +20,7 @@ class HomeViewController: UIViewController {
     }
 
     private func configureNavigationBar() {
-        NavigationBarHelper.configureNavigationBar(for: self)
+      NavigationBarHelper.configureNavigationBar(for: self, isExtendedMode: true, categoryName: "")
     }
 
     // Function to fetch categories from the API
@@ -42,11 +42,12 @@ class HomeViewController: UIViewController {
         view.addSubview(categoryCollectionView)
 
         categoryCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        categoryCollectionView.navigationController = self.navigationController
 
         NSLayoutConstraint.activate([
-            categoryCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            categoryCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            categoryCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+          categoryCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            categoryCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            categoryCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
             categoryCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }

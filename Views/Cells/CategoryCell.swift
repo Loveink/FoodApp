@@ -24,7 +24,7 @@ class CategoryCell: UICollectionViewCell {
     }
 
     //MARK: - Outlets
-    private let newsImageView: UIImageView = {
+    private let dishImageView: UIImageView = {
         let image = UIImageView()
         image.contentMode = .scaleAspectFill
         image.layer.cornerRadius = 20
@@ -60,7 +60,7 @@ class CategoryCell: UICollectionViewCell {
 
                   if let data = data, let image = UIImage(data: data) {
                       DispatchQueue.main.async {
-                          self?.newsImageView.image = image
+                          self?.dishImageView.image = image
                       }
                   }
               }.resume()
@@ -73,23 +73,23 @@ class CategoryCell: UICollectionViewCell {
 
 
     private func setupViews() {
-        contentView.addSubview(newsImageView)
+        contentView.addSubview(dishImageView)
         contentView.addSubview(categoryLabel)
     }
 
     //MARK: - Constraints
-    private func setupConstraints() {
-        NSLayoutConstraint.activate([
-            newsImageView.topAnchor.constraint(equalTo: topAnchor,constant: 0),
-            newsImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
-            newsImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
-            newsImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0),
+  private func setupConstraints() {
+    NSLayoutConstraint.activate([
+      dishImageView.topAnchor.constraint(equalTo: topAnchor,constant: 0),
+      dishImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
+      dishImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
+      dishImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0),
 
-            categoryLabel.leadingAnchor.constraint(equalTo: newsImageView.leadingAnchor, constant: 15),
-            categoryLabel.topAnchor.constraint(equalTo: newsImageView.topAnchor, constant: 15),
-            categoryLabel.widthAnchor.constraint(equalToConstant: 191)
+      categoryLabel.leadingAnchor.constraint(equalTo: dishImageView.leadingAnchor, constant: 15),
+      categoryLabel.topAnchor.constraint(equalTo: dishImageView.topAnchor, constant: 15),
+      categoryLabel.widthAnchor.constraint(equalToConstant: 191)
 
-        ])
-    }
+    ])
+  }
 }
 
